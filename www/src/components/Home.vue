@@ -1,17 +1,25 @@
 <template>
   <div class="hello">
-    
+    Main
   </div>
 </template>
 
 <script>
+import router from '../router'
 export default {
   name: 'Home',
+  mounted(){
+      if(!this.$store.state.user._id){
+        router.push({name: 'login'})
+      }
+    },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      
     }
-  }
+  },
+  computed: {},
+  methods: {}
 }
 </script>
 

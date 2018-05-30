@@ -10,13 +10,26 @@ app.use(cors())
 require('./server-assets/db/mlab-config')
 
 // register middleware
-
+let auth = require('./server-assets/auth/routes')
+app.use(auth.session)
+app.use(auth.router)
 app.use(bp.json())
 app.use(bp.urlencoded({extended: true}))
 
 // code above will never change
 
+//Gate Keeper Must login to access any route below this code
+app.use((req,res,next)=>{
+    if (!req.session.uid) {
+      return res.status(401).send({
+        error: 'please login to continue'
+      })
+    }
+    next()
+  })
+
 // routes
+
 var users = require('./server-assets/routes/users')
 var boards = require('./server-assets/routes/boards')
 var comments = require('./server-assets/routes/comments')
