@@ -7,6 +7,7 @@ var boardSchema = new Schema ({
     title: {type: String, required: true},
     description: {type: String},
     creator: {type: ObjectId, ref: 'User', required: true}
+})
 
 
 module.exports = mongoose.model(schemaName, boardSchema)

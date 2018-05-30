@@ -1,14 +1,23 @@
 <template>
+  <div>
   <div id="app">
     <img src="./assets/logo.png">
     <router-view/>
+    <button @click="logout">logout</button>
   </div>
+</div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  methods:{
+    logout(){
+      this.$store.dispatch('logout')
+    }
+  }
 }
+
 </script>
 
 <style>

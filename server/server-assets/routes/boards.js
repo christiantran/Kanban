@@ -29,7 +29,7 @@ router.get('/api/boards', (req, res, next) => {
 
 //Update entire board array
 router.put('/api/boards/:id', (req, res) => {
-  Board.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  Boards.findByIdAndUpdate(req.params.id, req.body, {new: true})
     .then(board => {
       res.send(board)
     })
@@ -40,7 +40,7 @@ router.put('/api/boards/:id', (req, res) => {
 
 //Delete
 router.delete('/api/boards/:id', (req, res, next) => {
-  Board.findByIdAndRemove(req.params.id)
+  Boards.findByIdAndRemove(req.params.id)
     .then(oldBoard => {
       res.send("Successfully Deleted")
     })

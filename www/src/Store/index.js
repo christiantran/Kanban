@@ -7,7 +7,7 @@ import router from "../router"
 vue.use(vuex)
 
 var api = axios.create({
-  baseURL: 'http://localhost:3000/',
+  baseURL: 'localhost:3000/',
   timeout: 3000,
   withCredentials: true
 })
@@ -36,18 +36,28 @@ export default new vuex.Store({
       auth.post('login', loginCredentials)
         .then(res=>{
           commit('setUser', res.data)
-          router.push({name: 'HelloWorld'})
+          router.push({name: 'Home'})
         })
     },
     logout({commit, dispatch}){
+      auth.delete('/logout')
+      .then(res=>{
+        commit('deleteUser')
+        router.push({name: 'login'})
+      })
     },
     register({commit, dispatch}, userData){
+      auth.post('register', userData)
+      .then(res=>{
+        commit('register')
+        router.push({name: 'login'})
+      })
     },
     authenticate({commit, dispatch}){
       api.get('/authenticate')
         .then(res=>{
           commit('setUser', res.data)
-          router.push({name: 'HelloWorld'})
+          router.push({name: 'Home'})
         })
         .catch(res=>{
           console.log(res.data)

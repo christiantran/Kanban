@@ -13,7 +13,8 @@ export default {
         router.push({name: 'login'})
       }
     },
-  data () {
+    
+    data () {
     return {
       
     }
