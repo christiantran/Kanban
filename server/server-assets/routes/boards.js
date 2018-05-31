@@ -1,6 +1,7 @@
 var router = require('express').Router()
 var Boards = require('../models/board')
 var User = require('../models/user')
+var session = require('../auth/session')
 
 //Post
 //Create new Board

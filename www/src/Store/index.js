@@ -7,7 +7,7 @@ import router from "../router"
 vue.use(vuex)
 
 var api = axios.create({
-  baseURL: 'localhost:3000/',
+  baseURL: 'http://localhost:3000/api',
   timeout: 3000,
   withCredentials: true
 })
@@ -19,7 +19,8 @@ var auth = axios.create({
 
 export default new vuex.Store({
   state: {
-    user: {}
+    user: {},
+    boards: []
   },
   mutations: {
     setUser(state, user){
@@ -27,6 +28,9 @@ export default new vuex.Store({
     },
     deleteUser(state){
       state.user = {}
+    },
+    setBoards(state,boards){
+      state.boards = boards
     }
   },
   actions: {
@@ -49,12 +53,12 @@ export default new vuex.Store({
     register({commit, dispatch}, userData){
       auth.post('register', userData)
       .then(res=>{
-        commit('register')
-        router.push({name: 'login'})
+        commit('setUser', res.data)
+        router.push({name: 'Home'})
       })
     },
     authenticate({commit, dispatch}){
-      api.get('/authenticate')
+      auth.get('/authenticate')
         .then(res=>{
           commit('setUser', res.data)
           router.push({name: 'Home'})
@@ -62,7 +66,26 @@ export default new vuex.Store({
         .catch(res=>{
           console.log(res.data)
         })
+    },
+    addBoard ({dispatch, commit}, board){
+      api.post('/boards', board)
+      .then (res=>{
+        dispatch('getBoards')
+      })
+    },
+    getBoards({commit, dispatch}){
+      api.get('/boards')
+      .then(res=>{
+        commit('setBoards', res.data)
+      })
+    },
+    removeBoard({commit, dispatch, state}, board){
+      api.delete('/boards/'+board._id, board)
+      .then(res=>{
+        dispatch('getBoards')
+      })
     }
+
 
     //APP STUFF
 

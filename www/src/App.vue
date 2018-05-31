@@ -1,9 +1,7 @@
 <template>
   <div>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view/>
-    <button @click="logout">logout</button>
   </div>
 </div>
 </template>
@@ -12,9 +10,7 @@
 export default {
   name: 'App',
   methods:{
-    logout(){
-      this.$store.dispatch('logout')
-    }
+
   }
 }
 

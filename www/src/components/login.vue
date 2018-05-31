@@ -11,8 +11,8 @@
     <div class="register-page">
       <form @submit.prevent="userRegister">
         <input type="text" name="name" id="name" v-model="register.name" placeholder="User Name">
-        <input type="text" name="email" id="email" v-model="register.email" placeholder="Email Address">
-        <input type="password" name="password" id="password" v-model="register.password" placeholder="Password">
+        <input type="text" name="regEmail" id="regEmail" v-model="register.email" placeholder="Email Address">
+        <input type="password" name="regPassword" id="regPassword" v-model="register.password" placeholder="Password">
         <button type="submit">Register</button>
       </form>
     </div>
@@ -49,12 +49,13 @@
       },
       userRegister() {
         this.$store.dispatch('register', this.register)
-        this.register={
+        this.register = {
           name: '',
           email: '',
           password: ''
         }
-      }
+      },
+
     }
   }
 </script>
