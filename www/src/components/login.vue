@@ -1,10 +1,21 @@
 <template>
-  <div class="login-page">
-    <form @submit.prevent="userLogin">
-      <input type="text" name="email" id="email" v-model="login.email">
-      <input type="password" name="password" id="password" v-model="login.password">
-      <button type="submit">LOGIN</button>
-    </form>
+  <div>
+    <div class="login-page">
+      <form @submit.prevent="userLogin">
+        <input type="text" name="email" id="email" v-model="login.email" placeholder="Email Address">
+        <input type="password" name="password" id="password" v-model="login.password" placeholder="Password">
+        <button type="submit">LOGIN</button>
+      </form>
+    </div>
+
+    <div class="register-page">
+      <form @submit.prevent="userRegister">
+        <input type="text" name="name" id="name" v-model="register.name" placeholder="User Name">
+        <input type="text" name="email" id="email" v-model="register.email" placeholder="Email Address">
+        <input type="password" name="password" id="password" v-model="register.password" placeholder="Password">
+        <button type="submit">Register</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -19,6 +30,11 @@
         login: {
           email: '',
           password: ''
+        },
+        register: {
+          name: '',
+          email: '',
+          password: ''
         }
       }
     },
@@ -26,9 +42,21 @@
     methods: {
       userLogin() {
         this.$store.dispatch('login', this.login)
-      }
-  }
+        this.login = {
+          email: '',
+          password: ''
         }
+      },
+      userRegister() {
+        this.$store.dispatch('register', this.register)
+        this.register={
+          name: '',
+          email: '',
+          password: ''
+        }
+      }
+    }
+  }
 </script>
 
 <style>
