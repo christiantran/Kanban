@@ -17,6 +17,17 @@ router.post('/api/boards', (req, res, next) => {
     })
 })
 
+// Find a single board by Id
+router.get('/api/boards/:id', (req, res, next) => {
+  Boards.findById(req.params.id)
+    .then(board => {
+      res.status(200).send(board)
+    })
+    .catch(err => {
+      res.status(400).send(err)
+    })
+})
+
 //finds all boards by creator id
 router.get('/api/boards', (req, res, next) => {
   Boards.find({creator: req.session.uid})

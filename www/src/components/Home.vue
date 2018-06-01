@@ -49,7 +49,7 @@
           <h5>{{board.title}}</h5>
           <h6 class="card-subtitle mb-2 text-muted"></h6>
           <p>{{board.description}}</p>
-          <a href="#" class="card-link">View Board</a>
+          <router-link :to="'/Boards/'+board._id">View Board</router-link>
           <a href="#" class="card-link" @click="removeBoard(board)">Delete Board</a>
         </div>
       </div>
@@ -60,8 +60,13 @@
 <script>
   import router from '../router'
   //import boards from '../boards'
+  import board from './Board'
+
   export default {
     name: 'Home',
+    components:{
+      board
+    },
     mounted() {
       if (!this.$store.state.user._id) {
         router.push({ name: 'login' })
@@ -97,6 +102,9 @@
       },
       getBoard() {
         this.$store.dispatch('getBoards')
+      },
+      viewBoard(){
+        this.$store.dispatch('viewBoard')
       },
       removeBoard(board){
         this.$store.dispatch('removeBoard', board)
