@@ -1,16 +1,16 @@
 var express = require('express')
 var bp = require('body-parser')
 var app = express()
+let server = require('http').createServer(app)
 var cors = require('cors')
 var port = process.env.PORT || 3000
 
-app.use(express.static(__dirname + "../www/dist"))
 
 
 var whitelist = ['http://localhost:8080', 'https://cekanban.herokuapp.com'];
 var corsOptions = {
-	origin: function (origin, callback) {
-		var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+  origin: function (origin, callback) {
+    var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
 		callback(null, originIsWhitelisted);
 	},
 	credentials: true
@@ -19,6 +19,8 @@ var corsOptions = {
 app.use(cors(corsOptions))
 
 require('./server-assets/db/mlab-config')
+
+app.use(express.static(__dirname + "/../www/dist"))
 
 // register middleware
 let auth = require('./server-assets/auth/routes')
