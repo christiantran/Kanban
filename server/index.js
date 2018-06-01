@@ -4,8 +4,10 @@ var app = express()
 var cors = require('cors')
 var port = 3000
 
+app.use(express.static(__dirname + "../www/dist"))
 
-var whitelist = ['http://localhost:8080'];
+
+var whitelist = ['http://localhost:8080', 'https://cekanban.herokuapp.com'];
 var corsOptions = {
 	origin: function (origin, callback) {
 		var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
