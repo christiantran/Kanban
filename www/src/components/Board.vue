@@ -71,6 +71,7 @@ export default {
   mounted() {
     this.$store.dispatch("getLists");
   },
+  
   data() {
     return {
       list: {
