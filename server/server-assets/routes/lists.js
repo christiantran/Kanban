@@ -51,7 +51,7 @@ router.put('/api/lists/:id', (req, res, next)=>{
 router.delete('/api/lists/:id', (req, res, next)=>{
     Lists.findByIdAndRemove(req.params.id)
     .then(data=>{
-        res.send({message: "Successfully Delted!"})
+        res.send({message: "Successfully Deleted!"})
     })
         .catch(err =>{
             res.status(400).send(err)

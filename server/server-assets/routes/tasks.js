@@ -23,8 +23,9 @@ router.get('/api/tasks/:id', (req, res, next)=>{
         })
 })
 
-router.post('/api/task', (req, res, next)=>{
+router.post('/api/tasks', (req, res, next)=>{
     var task = req.body
+    task.creator = req.session.uid
     Tasks.create(task)
     .then(newTask=>{
         res.status(200).send(newTask)
@@ -61,7 +62,7 @@ router.put('/api/tasks/:id', (req, res, next)=>{
 router.delete('/api/tasks/:id', (req, res, next)=>{
     Tasks.findByIdAndRemove(req.params.id)
     .then(data=>{
-        res.send({message: "Successfully Delted!"})
+        res.send({message: "Successfully Deleted!"})
     })
         .catch(err =>{
             res.status(400).send(err)
