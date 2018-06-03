@@ -50,7 +50,7 @@
                 <div class="card-body">
                     <h5>{{list.title}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted"></h6>
-                    <router-link :to="'/Boards/'+board._id">View List</router-link>
+                    <router-link :to="'/Lists/'+list._id">View List</router-link>
                     <a href="#" class="card-link" @click="removeList(list)">Delete List</a>
                 </div>
             </div>
@@ -59,43 +59,49 @@
 </template>
 
 <script>
-    import router from '../router'
-    import list from './list'
-    export default {
-        name: 'Board',
-        components: {
-            list
-        },
-        mounted() {
-            this.$store.dispatch('viewBoard', this.$route.params.boardId)
-        },
-        data() {
-            return {
+import router from "../router";
+//import home from "../Home";
+import list from "./List";
 
-            }
-        },
-        computed: {
-            board() {
-                return this.$store.state.activeBoard
-            },
-            list() {
-                return this.$store.state.lists
-            }
-        },
-        methods: {
-            logout() {
-                this.$store.dispatch('logout')
-            },
-            getList() {
-                this.$store.dispatch('getLists')
-            },
-            newList() {
-                this.$store.dispatch('addList', this.list)
-            },
-            removeList(list) {
-                this.$store.dispatch('removeList', list)
-            }
-        }
+export default {
+  name: "Board",
+  components: {
+    list
+  },
+  mounted() {
+    this.$store.dispatch("getLists");
+  },
+  data() {
+    return {
+      list: {
+        name: ""
+      }
+    };
+  },
+  computed: {
+    board() {
+      return this.$store.state.activeBoard;
+    },
+    lists() {
+      return this.$store.state.lists;
     }
-
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+    },
+    getList() {
+      this.$store.dispatch("getLists");
+    },
+    newList() {
+      this.$store.dispatch("addList", this.list);
+    },
+    removeList(list) {
+      this.$store.dispatch("removeList", list);
+    },
+    viewList(){
+        this.$store.distpatch('viewList')
+    }
+  }
+};
 </script>

@@ -122,6 +122,12 @@ export default new vuex.Store({
       })
     },
 
+    viewLists({commit, dispatch, state}, listId){
+      api.get('/lists/'+listId)
+      .then(res=>{
+        commit(res.data)
+      })
+    },
 
     //APP STUFF
 

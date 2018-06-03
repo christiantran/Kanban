@@ -4,6 +4,7 @@ var User = require('../models/user')
 
 // Get all
 router.get('/api/lists', (req, res, next)=>{
+    //Lists.find({creator: req.session.uid})
     Lists.find(req.query)
     .then(lists=>{
         res.status(200).send(lists)
@@ -23,8 +24,9 @@ router.get('/api/lists/:id', (req, res, next)=>{
         })
 })
 
-router.post('/api/list', (req, res, next)=>{
+router.post('/api/lists', (req, res, next)=>{
     var list = req.body
+    //list.creator = req.session.uid
     Lists.create(list)
     .then(newList=>{
         res.status(200).send(newList)
@@ -53,7 +55,7 @@ router.put('/api/lists/:id', (req, res, next)=>{
         res.status(200).send({message: "Successfully Updated!", list})
     })
         .catch(err =>{
-            res.status(400).send(err)
+           return res.status(400).send(err)
         })
 })
 
