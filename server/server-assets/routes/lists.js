@@ -26,7 +26,7 @@ router.get('/api/lists/:id', (req, res, next)=>{
 
 router.post('/api/lists', (req, res, next)=>{
     var list = req.body
-    //list.creator = req.session.uid
+    list.creator = req.session.uid
     Lists.create(list)
     .then(newList=>{
         res.status(200).send(newList)
@@ -35,18 +35,6 @@ router.post('/api/lists', (req, res, next)=>{
             res.status(400).send(err)
         })
 })
-
-// router.put('/api/lists/:id/task', (req, res) => {
-//     Lists.findById(req.params.id)
-//     .then(function(list){
-//         list.songs.addToSet(req.body)
-//         list.save()
-//     })
-//     .catch(err=>{
-//         res.status(400).send(err)
-//     })
-//  })
-
 
 // edit
 router.put('/api/lists/:id', (req, res, next)=>{

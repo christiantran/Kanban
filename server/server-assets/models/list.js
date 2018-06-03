@@ -6,12 +6,12 @@ var schemaName = "List"
 
 var listSchema = new Schema ({
     title: {type: String, required: true},
-    user: {type: String, required: true},
+    user: {type: String},
 
     userId:{
         type: ObjectId,
         ref: 'User',
-        required: true
+        //required: true
     },
 
     boardId: {

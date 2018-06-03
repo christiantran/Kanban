@@ -79,7 +79,7 @@ export default new vuex.Store({
           console.log(res.data)
         })
     },
-    addBoard ({dispatch, commit}, board){
+    addBoard({dispatch, commit}, board){
       api.post('/boards', board)
       .then (res=>{
         dispatch('getBoards')
@@ -103,7 +103,7 @@ export default new vuex.Store({
         commit('setActiveBoard', res.data)
       })
     },
-    addList ({dispatch, commit}, list){
+    addList({dispatch, commit}, list){
       api.post('/lists', list)
       .then (res=>{
         dispatch('getLists')
@@ -122,7 +122,7 @@ export default new vuex.Store({
       })
     },
 
-    viewLists({commit, dispatch, state}, listId){
+    viewList({commit, dispatch, state}, listId){
       api.get('/lists/'+listId)
       .then(res=>{
         commit(res.data)

@@ -59,50 +59,54 @@
 </template>
 
 <script>
-import router from "../router";
-//import home from "../Home";
-import list from "./List";
+    import router from "../router";
+    //import home from "../Home";
+    import list from "./List";
 
-export default {
-  name: "Board",
-  components: {
-    list
-  },
-  mounted() {
-    this.$store.dispatch("getLists");
-  },
-  
-  data() {
-    return {
-      list: {
-        name: ""
-      }
-    };
-  },
-  computed: {
-    board() {
-      return this.$store.state.activeBoard;
-    },
-    lists() {
-      return this.$store.state.lists;
+    export default {
+        name: "Board",
+        components: {
+            list
+        },
+        mounted() {
+            this.$store.dispatch("getLists");
+        },
+
+        data() {
+            return {
+                list: {
+                    title: ""
+                }
+            }
+        },
+        computed: {
+            board() {
+                return this.$store.state.activeBoard;
+            },
+            lists() {
+                return this.$store.state.lists;
+            },
+            user() {
+                return this.$store.state.user
+            }
+        },
+        methods: {
+            logout() {
+                this.$store.dispatch("logout");
+            },
+            getList() {
+                this.$store.dispatch("getLists");
+            },
+            newList() {
+                this.$store.dispatch("addList", this.list)
+            },
+            removeList(list) {
+                this.$store.dispatch("removeList", list)
+            },
+            viewList(){
+                this.$store.distpatch('viewList')
+            }
+        }
     }
-  },
-  methods: {
-    logout() {
-      this.$store.dispatch("logout");
-    },
-    getList() {
-      this.$store.dispatch("getLists");
-    },
-    newList() {
-      this.$store.dispatch("addList", this.list);
-    },
-    removeList(list) {
-      this.$store.dispatch("removeList", list);
-    },
-    viewList(){
-        this.$store.distpatch('viewList')
-    }
-  }
-};
+
 </script>
