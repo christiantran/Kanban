@@ -35,17 +35,6 @@ router.post('/api/tasks', (req, res, next)=>{
         })
 })
 
-// router.put('/api/tasks/:id/task', (req, res) => {
-//     Tasks.findById(req.params.id)
-//     .then(function(task){
-//         list.songs.addToSet(req.body)
-//         list.save()
-//     })
-//     .catch(err=>{
-//         res.status(400).send(err)
-//     })
-//  })
-
 
 // edit
 router.put('/api/tasks/:id', (req, res, next)=>{
