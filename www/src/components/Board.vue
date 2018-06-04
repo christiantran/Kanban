@@ -39,12 +39,12 @@
                 </div>
             </div>
         </nav>
-        <div>
-            <div class="board-body">
+        
+            <span class="board-body">
                 <h1>{{board.title}}</h1>
                 <p>{{board.description}}</p>
-            </div>
-        </div>
+            </span>
+        
         <div>
             <div class="card" v-for="list in lists" style="width: 30rem;">
                 <div class="card-body">
