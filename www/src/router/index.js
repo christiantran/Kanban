@@ -4,7 +4,7 @@ import Home from '@/components/Home'
 import login from '@/components/login'
 import Board from '@/components/Board'
 import List from '@/components/List'
-//import Comment from '@/components/Comment'
+import Comment from '@/components/Comments'
 // import Task from '@/components/Task'
 
 Vue.use(Router)
@@ -32,7 +32,7 @@ export default new Router({
       component: List
     },
     {
-      path: '/Comment',
+      path: '/Comments/:commentId',
       name: 'Comment',
       component: Comment
     }

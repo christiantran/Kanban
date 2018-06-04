@@ -63,17 +63,14 @@
     </div>
 
 
-
-  </div>
   </div>
 
-  </div>
 </template>
 
 <script>
   import router from "../router";
-  import board from "../Board";
-  import task from "./Task";
+  import board from "./Board";
+  // import task from "./Task";
 
   export default {
     name: "Comment",
