@@ -138,7 +138,7 @@ export default new vuex.Store({
     addTask({dispatch, commit}, task){
       api.post('tasks', task)
       .then(res=>{
-        dispatch('getRasks')
+        dispatch('getTasks')
       })
     },
 
