@@ -39,15 +39,12 @@
                 </div>
             </div>
         </nav>
-
-        <span class="board-body">
-            <h1>{{board.title}}</h1>
-            <p>{{board.description}}</p>
-        </span>
-
+        <h1>
+            <span class="headline">{{board.title}}</span>
+        </h1>
         <div>
-            <div class="card" v-for="list in lists" style="width: 30rem;">
-                <div class="card-body">
+            <div class="card1" v-for="list in lists" style="width: 30rem">
+                <div class="card-body ">
                     <h5>{{list.title}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted"></h6>
                     <!-- <router-link :to="'/Lists/'+list._id">View List</router-link> -->
@@ -88,7 +85,7 @@
 
                     <!-- TASK BODY -->
                     <div>
-                        <div class="card" v-for="task in tasks" style="width: 30rem;">
+                        <div class="card card2" v-for="task in tasks" style="width: 25rem;">
                             <div class="card-body">
                                 <h5>{{task.body}}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted"></h6>
@@ -177,3 +174,9 @@
         }
     };
 </script>
+
+<style>
+    .card1 {
+        background-color: lightgrey
+    }
+</style>
