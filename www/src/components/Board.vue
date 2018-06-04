@@ -119,7 +119,7 @@
         },
         mounted() {
             this.$store.dispatch("getLists");
-            // this.$store.dispatch("getTasks");
+            this.$store.dispatch("getTasks");
         },
 
         data() {
