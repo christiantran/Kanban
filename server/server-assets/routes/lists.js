@@ -13,17 +13,27 @@ router.get('/api/lists', (req, res, next)=>{
             res.status(400).send(err)
         })
 })
-
-router.get('/api/lists/:id', (req, res, next)=>{
-    Lists.findById(req.params.id)
-    .then(list=>{
-        res.status(200).send(list)
+// Never used
+// router.get('/api/lists/:id', (req, res, next)=>{
+//     Lists.findById(req.params.id)
+//     .then(list=>{
+//         res.status(200).send(list)
+//     })
+//         .catch(err =>{
+//             res.status(400).send(err)
+//         })
+// })
+// Get by Board Id
+router.get('/api/boards/:boardId/lists', (req, res, next)=>{
+    Lists.find({boardId: req.params.boardId})
+    // Lists.find(req.query)
+    .then(lists=>{
+        res.status(200).send(lists)
     })
         .catch(err =>{
             res.status(400).send(err)
         })
 })
-
 router.post('/api/lists', (req, res, next)=>{
     var list = req.body
     list.creator = req.session.uid

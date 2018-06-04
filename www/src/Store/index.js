@@ -116,11 +116,11 @@ export default new vuex.Store({
     addList({dispatch, commit}, list){
       api.post('/lists', list)
       .then (res=>{
-        dispatch('getLists')
+        dispatch('getLists', list.boardId)
       })
     },
-    getLists({commit, dispatch}){
-      api.get('/lists')
+    getLists({commit, dispatch}, boardId){
+      api.get('/boards/'+boardId+ '/lists')
       .then(res=>{
         commit('setLists', res.data)
       })

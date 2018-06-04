@@ -130,7 +130,7 @@ export default {
     list
   },
   mounted() {
-    this.$store.dispatch("getLists");
+    this.$store.dispatch("getLists", this.$route.params.boardId);
     this.$store.dispatch("getTasks");
   },
 
@@ -169,6 +169,9 @@ export default {
       this.$store.dispatch("getLists");
     },
     newList() {
+        this.list.boardId = this.$route.params.boardId
+        this.list.userId = this.user._id
+        debugger
       this.$store.dispatch("addList", this.list);
     },
     removeList(list) {
