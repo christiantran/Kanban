@@ -134,6 +134,7 @@
     color: #42b983;
   }
 
+
   .headline {
     border-bottom: 1px solid;
     width: 100%;
