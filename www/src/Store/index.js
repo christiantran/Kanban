@@ -83,6 +83,7 @@ export default new vuex.Store({
           console.log(res.data)
         })
     },
+    // BOARD STUFF
     addBoard({dispatch, commit}, board){
       api.post('/boards', board)
       .then (res=>{
@@ -107,6 +108,7 @@ export default new vuex.Store({
         commit('setActiveBoard', res.data)
       })
     },
+    // LIST STUFF
     addList({dispatch, commit}, list){
       api.post('/lists', list)
       .then (res=>{
@@ -132,6 +134,7 @@ export default new vuex.Store({
         commit(res.data)
       })
     },
+    // TASK STUFF
     addTask({dispatch, commit}, task){
       api.post('tasks', task)
       .then(res=>{
@@ -161,7 +164,7 @@ export default new vuex.Store({
     },
 
 
-    //APP STUFF
+
 
   }
 })

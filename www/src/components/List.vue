@@ -1,6 +1,6 @@
 <template>
     <div>
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-dark">
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link active" href="#">Home
@@ -54,58 +54,56 @@
                     <a href="#" class="card-link" @click="removeTask(task)">Delete Task</a>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script>
-    import router from "../router";
-    //import home from "../Home";
-    import board from "./Board";
+//import router from "../router";
+//import home from "../Home";
+// import board from "./Board";
 
-export default {
-            name: "List",
-        components: {
-            task
-        },
-        mounted() {
-            this.$store.dispatch("getTasks");
-        },
+// export default {
+//   name: "List",
+//   components: {},
+//   mounted() {
+//     this.$store.dispatch("getTasks");
+//   },
 
-                data() {
-            return {
-                task: {
-                    body: ""
-                }
-            }
-        },
-        computed: {
-            list() {
-                return this.$store.state.activeList;
-            },
-            tasks() {
-                return this.$store.state.tasks;
-            },
-            user() {
-                return this.$store.state.user
-            }
-        },
-                methods: {
-            logout() {
-                this.$store.dispatch("logout");
-            },
-            getTask() {
-                this.$store.dispatch("getTasks");
-            },
-            newTask() {
-                this.$store.dispatch("addTask", this.task)
-            },
-            removeTask(task) {
-                this.$store.dispatch("removeTask", task)
-            },
-            viewTask(){
-                this.$store.distpatch('viewTask')
-            }
-        }
-}
+//   data() {
+//     return {
+//       task: {
+//         body: ""
+//       }
+//     };
+//   },
+//   computed: {
+//     list() {
+//       return this.$store.state.activeList;
+//     },
+//     tasks() {
+//       return this.$store.state.tasks;
+//     },
+//     user() {
+//       return this.$store.state.user;
+//     }
+//   },
+//   methods: {
+//     logout() {
+//       this.$store.dispatch("logout");
+//     },
+//     getTask() {
+//       this.$store.dispatch("getTasks");
+//     },
+//     newTask() {
+//       this.$store.dispatch("addTask", this.task);
+//     },
+//     removeTask(task) {
+//       this.$store.dispatch("removeTask", task);
+//     },
+//     viewTask() {
+//       this.$store.distpatch("viewTask");
+//     }
+//   }
+// };
 </script>
