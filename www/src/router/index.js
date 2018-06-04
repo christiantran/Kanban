@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import login from '@/components/login'
 import Board from '@/components/Board'
 import List from '@/components/List'
+//import Comment from '@/components/Comment'
 // import Task from '@/components/Task'
 
 Vue.use(Router)
@@ -30,6 +31,11 @@ export default new Router({
       name: 'List',
       component: List
     },
+    {
+      path: '/Comment',
+      name: 'Comment',
+      component: Comment
+    }
     // {
     // path: '/Task',
     // name: 'Task',

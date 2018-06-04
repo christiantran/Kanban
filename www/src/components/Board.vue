@@ -92,12 +92,24 @@
                             <div class="card-body">
                                 <h5>{{task.body}}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted"></h6>
-                                <router-link :to="'/Tasks/'+task._id">View Task</router-link>
+                                <!-- <router-link :to="'/Tasks/'+task._id">View Task</router-link> -->
+                                <router-link :to="'/Comments/'+comment._id">View Comment</router-link>
                                 <a href="#" class="card-link" @click="removeTask(task)">Delete Task</a>
                             </div>
                         </div>
                     </div>
 
+
+<!-- <div>
+      <div class="card" v-for="comment in comments" style="width: 20rem;">
+        <div class="card-body">
+          <h5>{{comment.body}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted"></h6>
+          <router-link :to="'/Comments/'+comment._id">View Comment</router-link>
+<a href="#" class="card-link" @click="removeComment(comment)">Delete Comment</a>
+        </div>
+      </div>
+    </div> -->
 
 
                 </div>
@@ -108,80 +120,86 @@
 </template>
 
 <script>
-    import router from "../router";
-    //import home from "../Home";
-    import list from "./List";
+import router from "../router";
+//import home from "../Home";
+import list from "./List";
 
-    export default {
-        name: "Board",
-        components: {
-            list
-        },
-        mounted() {
-            this.$store.dispatch("getLists");
-            this.$store.dispatch("getTasks");
-        },
+export default {
+  name: "Board",
+  components: {
+    list
+  },
+  mounted() {
+    this.$store.dispatch("getLists");
+    this.$store.dispatch("getTasks");
+  },
 
-        data() {
-            return {
-                list: {
-                    title: ""
-                },
-                task: {
-                    body: ""
-                }
-            };
-        },
-        computed: {
-            board() {
-                return this.$store.state.activeBoard;
-            },
-            lists() {
-                return this.$store.state.lists;
-            },
-            tasks() {
-                return this.$store.state.tasks;
-            },
-            user() {
-                return this.$store.state.user;
-            }
-        },
-        methods: {
-            logout() {
-                this.$store.dispatch("logout");
-            },
-            getList() {
-                this.$store.dispatch("getLists");
-            },
-            newList() {
-                this.$store.dispatch("addList", this.list);
-            },
-            removeList(list) {
-                this.$store.dispatch("removeList", list);
-            },
-            viewList() {
-                this.$store.distpatch("viewList");
-            },
-            getTask() {
-                this.$store.dispatch("getTasks");
-            },
-            newTask() {
-                this.$store.dispatch("addTask", this.task);
-            },
-            removeTask(task) {
-                this.$store.dispatch("removeTask", task);
-            },
-            viewTask() {
-                this.$store.dispatch("viewTask");
-            }
-        }
+  data() {
+    return {
+      list: {
+        title: ""
+      },
+      task: {
+        body: ""
+      },
+      comment: {
+          body: ""
+      }
     };
+  },
+  computed: {
+    board() {
+      return this.$store.state.activeBoard;
+    },
+    lists() {
+      return this.$store.state.lists;
+    },
+    tasks() {
+      return this.$store.state.tasks;
+    },
+    user() {
+      return this.$store.state.user;
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+    },
+    getList() {
+      this.$store.dispatch("getLists");
+    },
+    newList() {
+      this.$store.dispatch("addList", this.list);
+    },
+    removeList(list) {
+      this.$store.dispatch("removeList", list);
+    },
+    viewList() {
+      this.$store.distpatch("viewList");
+    },
+    getTask() {
+      this.$store.dispatch("getTasks");
+    },
+    newTask() {
+      this.$store.dispatch("addTask", this.task);
+    },
+    removeTask(task) {
+      this.$store.dispatch("removeTask", task);
+    },
+    viewTask() {
+      this.$store.dispatch("viewTask");
+    },
+    viewComment() {
+      this.$store.dispatch("viewComment");
+    }
+  }
+};
 </script>
 
 <style>
-    .card1 {
-        background-color: lightgrey;
-        border-style: solid;
-        border-color: black;
-    }
+.card1 {
+  background-color: lightgrey;
+  border-style: solid;
+  border-color: black;
+}
 </style>

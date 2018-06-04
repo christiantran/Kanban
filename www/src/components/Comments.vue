@@ -6,7 +6,9 @@
                     <a class="nav-item nav-link active" href="#">Home
                         <span class="sr-only">(current)</span>
                     </a>
-                    <button type="button" class='btn btn-link' data-toggle="modal" data-target="#createListModal">Create List</button>
+
+
+
 
 <!-- CREATE COMMENT -->
           <!-- Modal -->
@@ -39,26 +41,87 @@
               </div>
             </div>
           </div>
+</nav>
+
+    <h1>
+      <span class="headline">My Comments</span>
+    </h1>
 
 
 <!-- VIEW COMMENT -->
-<!-- <div>
+<div>
       <div class="card" v-for="comment in comments" style="width: 20rem;">
         <div class="card-body">
           <h5>{{comment.body}}</h5>
           <h6 class="card-subtitle mb-2 text-muted"></h6>
-          <p>{{comment.description}}</p>
           <router-link :to="'/Comments/'+comment._id">View Comment</router-link>
+<a href="#" class="card-link" @click="removeComment(comment)">Delete Comment</a>
         </div>
       </div>
-    </div> -->
+    </div>
 
 
-<!-- DELETE COMMENT -->
-<a href="#" class="card-link" @click="removeComment(comment)">Delete Comment</a>
 
                 </div>
                 </div>
-</nav>
+
     </div>
 </template>
+
+<script>
+import router from "../router";
+import board from "../Board";
+import task from "./Task";
+
+export default {
+  name: "Comment",
+  components: {
+    board
+  },
+  mounted() {
+    this.$store.dispatch("getComments");
+  },
+  data() {
+    return {
+      comment: {
+        body: ""
+      }
+    };
+  },
+  computed: {
+    board() {
+      return this.$store.state.activeBoard;
+    },
+    list() {
+      return this.$store.state.activeList;
+    },
+    task() {
+      return this.$store.state.activeTask;
+    },
+    user() {
+      return this.$store.state.user;
+    },
+    comments() {
+      return this.$store.state.comments;
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+    },
+    getComment() {
+      this.$store.dispatch("getComments");
+    },
+    newComment() {
+      this.$store.dispatch("addComment", this.comment);
+    },
+    removeComment(comment) {
+      this.$store.dispatch("removeComment", comment);
+    },
+    viewComment() {
+      this.$store.dispatch("viewComment");
+    }
+  }
+};
+</script>
+
