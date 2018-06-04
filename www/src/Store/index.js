@@ -162,6 +162,30 @@ export default new vuex.Store({
         commit(res.data)
       })
     },
+    addComment({dispatch, commit}, comment){
+      api.post('comments', comment)
+      .then(res=>{
+        dispatch('getComments')
+      })
+    },
+    getComments({commit, dispatch}){
+      api.get('/comments')
+      .then(res=>{
+        commit('setComments', res.data)
+      })
+    },
+    removeComments({commit, dispatch, state}, comment){
+      api.delete('/comments/'+comment._id, comment)
+      .then(res=>{
+        dispatch('getComments')
+      })
+    },
+    viewComments({commit, dispatch, state}, commentId){
+      api.get('/comments/'+commentId)
+      .then(res=>{
+        commit(res.data)
+      })
+    },
 
 
 

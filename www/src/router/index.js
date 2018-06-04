@@ -4,7 +4,7 @@ import Home from '@/components/Home'
 import login from '@/components/login'
 import Board from '@/components/Board'
 import List from '@/components/List'
-//import Task from '@/components/Task'
+// import Task from '@/components/Task'
 
 Vue.use(Router)
 

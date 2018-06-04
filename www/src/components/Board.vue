@@ -177,6 +177,12 @@
 
 <style>
     .card1 {
-        background-color: lightgrey
-    }
+        background-color: lightgrey;
+        border-style: solid;
+        border-color: black;
+ }
+
+
+
+    
 </style>
