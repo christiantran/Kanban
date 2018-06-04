@@ -39,9 +39,12 @@
                 </div>
             </div>
         </nav>
-        <h1>
-            <span class="headline">Board</span>
-        </h1>
+        <div>
+                <div class="headline">
+                    <h1>{{board.title}}</h1>
+                    <p>{{board.description}}</p>
+                </div>
+            </div>
         <div>
             <div class="card1" v-for="list in lists" style="width: 30rem">
                 <div class="card-body ">
