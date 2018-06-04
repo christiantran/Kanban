@@ -40,7 +40,7 @@
             </div>
         </nav>
         <h1>
-            <span class="headline">{{board.title}}</span>
+            <span class="headline">Board</span>
         </h1>
         <div>
             <div class="card1" v-for="list in lists" style="width: 30rem">
@@ -180,9 +180,5 @@
         background-color: lightgrey;
         border-style: solid;
         border-color: black;
- }
-
-
-
-    
+    }
 </style>
