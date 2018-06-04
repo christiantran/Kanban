@@ -66,7 +66,7 @@
 export default {
             name: "List",
         components: {
-            task
+
         },
         mounted() {
             this.$store.dispatch("getTasks");
