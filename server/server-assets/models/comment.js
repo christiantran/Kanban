@@ -5,7 +5,7 @@ var schemaName = 'Comment'
 
 var commentSchema = new Schema({
     body: { type: 'string', required: true, },
-    user: {type: 'string', required: true},
+    user: {type: 'string'},
 
     userId: {
         type: ObjectId,
