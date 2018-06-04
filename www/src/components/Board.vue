@@ -169,7 +169,7 @@
                 this.$store.dispatch("removeTask", task);
             },
             viewTask() {
-                this.$store.distpatch("viewTask");
+                this.$store.dispatch("viewTask");
             }
         }
     };
