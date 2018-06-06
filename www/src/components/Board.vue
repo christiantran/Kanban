@@ -7,7 +7,7 @@
                         <span class="sr-only">(current)</span>
                     </a>
 
-                     <!-- CREATE LIST -->
+                    <!-- CREATE LIST -->
                     <button type="button" class='btn btn-link' data-toggle="modal" data-target="#createListModal">Create List</button>
                     <div class="modal fade" id="createListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -42,11 +42,11 @@
             </div>
         </nav>
         <div>
-                <div class="headline">
-                    <h1>{{board.title}}</h1>
-                    <p>{{board.description}}</p>
-                </div>
+            <div class="headline">
+                <h1>{{board.title}}</h1>
+                <p>{{board.description}}</p>
             </div>
+        </div>
         <div>
             <div class="card1" v-for="list in lists" style="width: 30rem">
                 <div class="card-body ">
@@ -103,7 +103,7 @@
                     </div>
 
 
-<!-- <div>
+                    <!-- <div>
       <div class="card" v-for="comment in comments" style="width: 20rem;">
         <div class="card-body">
           <h5>{{comment.body}}</h5>
@@ -123,89 +123,90 @@
 </template>
 
 <script>
-import router from "../router";
-//import home from "../Home";
-import list from "./List";
+    import router from "../router";
+    //import home from "../Home";
+    import list from "./List";
 
-export default {
-  name: "Board",
-  components: {
-    list
-  },
-  mounted() {
-    this.$store.dispatch("getLists", this.$route.params.boardId);
-    this.$store.dispatch("getTasks");
-  },
+    export default {
+        name: "Board",
+        components: {
+            list
+        },
+        mounted() {
+            this.$store.dispatch("getLists", this.$route.params.boardId);
+            this.$store.dispatch("getTasks", this.$route.params.listId);
+        },
 
-  data() {
-    return {
-      list: {
-        title: ""
-      },
-      task: {
-        body: ""
-      },
-      comment: {
-          body: ""
-      }
+        data() {
+            return {
+                list: {
+                    title: ""
+                },
+                task: {
+                    body: ""
+                },
+                comment: {
+                    body: ""
+                }
+            };
+        },
+        computed: {
+            board() {
+                return this.$store.state.activeBoard;
+            },
+            lists() {
+                return this.$store.state.lists;
+            },
+            tasks() {
+                return this.$store.state.tasks;
+            },
+            user() {
+                return this.$store.state.user;
+            }
+        },
+        methods: {
+            logout() {
+                this.$store.dispatch("logout");
+            },
+            getList() {
+                this.$store.dispatch("getLists");
+            },
+            newList() {
+                this.list.boardId = this.$route.params.boardId
+                this.list.userId = this.user._id
+                this.$store.dispatch("addList", this.list);
+            },
+            removeList(list) {
+                this.$store.dispatch("removeList", list);
+            },
+            viewList() {
+                this.$store.distpatch("viewList");
+            },
+            getTask() {
+                this.$store.dispatch("getTasks");
+            },
+            newTask() {
+                this.task.listId = this.$route.params.listId
+                this.task.userId = this.user._id
+                this.$store.dispatch("addTask", this.task);
+            },
+            removeTask(task) {
+                this.$store.dispatch("removeTask", task);
+            },
+            viewTask() {
+                this.$store.dispatch("viewTask");
+            },
+            viewComment() {
+                this.$store.dispatch("viewComment");
+            }
+        }
     };
-  },
-  computed: {
-    board() {
-      return this.$store.state.activeBoard;
-    },
-    lists() {
-      return this.$store.state.lists;
-    },
-    tasks() {
-      return this.$store.state.tasks;
-    },
-    user() {
-      return this.$store.state.user;
-    }
-  },
-  methods: {
-    logout() {
-      this.$store.dispatch("logout");
-    },
-    getList() {
-      this.$store.dispatch("getLists");
-    },
-    newList() {
-        this.list.boardId = this.$route.params.boardId
-        this.list.userId = this.user._id
-        debugger
-      this.$store.dispatch("addList", this.list);
-    },
-    removeList(list) {
-      this.$store.dispatch("removeList", list);
-    },
-    viewList() {
-      this.$store.distpatch("viewList");
-    },
-    getTask() {
-      this.$store.dispatch("getTasks");
-    },
-    newTask() {
-      this.$store.dispatch("addTask", this.task);
-    },
-    removeTask(task) {
-      this.$store.dispatch("removeTask", task);
-    },
-    viewTask() {
-      this.$store.dispatch("viewTask");
-    },
-    viewComment() {
-      this.$store.dispatch("viewComment");
-    }
-  }
-};
 </script>
 
 <style>
-.card1 {
-  background-color: lightgrey;
-  border-style: solid;
-  border-color: black;
-}
+    .card1 {
+        background-color: lightgrey;
+        border-style: solid;
+        border-color: black;
+    }
 </style>

@@ -13,8 +13,8 @@ router.get('/api/tasks', (req, res, next)=>{
         })
 })
 
-router.get('/api/tasks/:id', (req, res, next)=>{
-    Tasks.findById(req.params.id)
+router.get('/api/lists/:listId/tasks', (req, res, next)=>{
+    Tasks.find({listId: req.params.listId})
     .then(task=>{
         res.status(200).send(task)
     })
