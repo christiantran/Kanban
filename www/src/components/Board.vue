@@ -6,6 +6,8 @@
                     <a class="nav-item nav-link active" href="#">Home
                         <span class="sr-only">(current)</span>
                     </a>
+
+                     <!-- CREATE LIST -->
                     <button type="button" class='btn btn-link' data-toggle="modal" data-target="#createListModal">Create List</button>
                     <div class="modal fade" id="createListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">

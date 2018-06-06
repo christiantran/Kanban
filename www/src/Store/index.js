@@ -180,7 +180,7 @@ export default new vuex.Store({
         commit('setComments', res.data)
       })
     },
-    removeComments({commit, dispatch, state}, comment){
+    removeComment({commit, dispatch, state}, comment){
       api.delete('/comments/'+comment._id, comment)
       .then(res=>{
         dispatch('getComments')
