@@ -11,7 +11,7 @@ var taskSchema = new Schema ({
     userId:{
         type: ObjectId,
         ref: 'User',
-        //required: true
+        required: true
     },
 
     boardId: {
@@ -22,6 +22,7 @@ var taskSchema = new Schema ({
     listId: {
         type:ObjectId,
         ref: 'List',
+        required: true
     },
 
 

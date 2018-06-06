@@ -5,8 +5,8 @@ var User = require('../models/user')
 // Get all
 router.get('/api/tasks', (req, res, next)=>{
     Tasks.find(req.query)
-    .then(task=>{
-        res.status(200).send(task)
+    .then(tasks=>{
+        res.status(200).send(tasks)
     })
         .catch(err =>{
             res.status(400).send(err)
@@ -15,8 +15,8 @@ router.get('/api/tasks', (req, res, next)=>{
 
 router.get('/api/lists/:listId/tasks', (req, res, next)=>{
     Tasks.find({listId: req.params.listId})
-    .then(task=>{
-        res.status(200).send(task)
+    .then(tasks=>{
+        res.status(200).send(tasks)
     })
         .catch(err =>{
             res.status(400).send(err)

@@ -35,9 +35,9 @@ export default new Router({
       path: '/Comments/:commentId',
       name: 'Comment',
       component: Comment
-    }
+    },
     // {
-    // path: '/Task',
+    // path: '/Task/:taskId',
     // name: 'Task',
     // component: Task
     // }
