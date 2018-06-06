@@ -70,9 +70,9 @@
 
   export default {
     name: "Comment",
-    components: {
-      board
-    },
+    // components: {
+    //   board
+    // },
     mounted() {
       this.$store.dispatch("getComments");
     },
