@@ -12,7 +12,7 @@
 
           <!-- CREATE COMMENT -->
           <!-- Modal -->
-          <button type="button" class='btn btn-link' data-toggle="modal" data-target="#createBoardModal">Create Comment</button>
+          <button type="button" class='btn btn-link' data-toggle="modal" data-target="#createCommentModal">Create Comment</button>
           <div class="modal fade" id="createCommentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -27,10 +27,6 @@
                     <div class="form-group">
                       <input type="text" name="commentBody" v-model="
                           comment.body" class="form-control" id="formGroupExampleInput" placeholder="Comment" required>
-                    </div>
-                    <div class="form-group">
-                      <input type="text" name="commentDescription" v-model="
-                              comment.description" class="form-control" id="formGroupExampleInput" placeholder="Description">
                     </div>
                   </form>
                 </div>
@@ -56,7 +52,7 @@
         <div class="card-body">
           <h5>{{comment.body}}</h5>
           <h6 class="card-subtitle mb-2 text-muted"></h6>
-          <router-link :to="'/Comments/'+comment._id">View Comment</router-link>
+          <!-- <router-link :to="'/Comments/'+comment._id">View Comment</router-link> -->
           <a href="#" class="card-link" @click="removeComment(comment)">Delete Comment</a>
         </div>
       </div>
