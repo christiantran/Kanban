@@ -25,30 +25,30 @@ export default new vuex.Store({
     user: {},
     boards: [],
     activeBoard: {},
-    lists:[],
-    tasks:[],
-    comments:[]
+    lists: [],
+    tasks: {},
+    comments: []
   },
   mutations: {
-    setUser(state, user){
+    setUser(state, user) {
       state.user = user
     },
-    deleteUser(state){
+    deleteUser(state) {
       state.user = {}
     },
-    setBoards(state,boards){
+    setBoards(state, boards) {
       state.boards = boards
     },
-    setActiveBoard(state, board){
+    setActiveBoard(state, board) {
       state.activeBoard = board
     },
-    setLists(state, lists){
+    setLists(state, lists) {
       state.lists = lists
     },
-    setTasks(state, tasks){
-      state.tasks = tasks
+    setTasks(state, payload) {
+      vue.set(state.tasks, payload.listId, payload.tasks) 
     },
-    setComments(state, comments){
+    setComments(state, comments) {
       state.comments = comments
     }
 
@@ -56,144 +56,148 @@ export default new vuex.Store({
   actions: {
 
     //AUTH STUFF
-    login({commit, dispatch}, loginCredentials){
+    login({ commit, dispatch }, loginCredentials) {
       auth.post('login', loginCredentials)
-        .then(res=>{
+        .then(res => {
           commit('setUser', res.data)
-          router.push({name: 'Home'})
+          router.push({ name: 'Home' })
         })
     },
-    logout({commit, dispatch}){
+    logout({ commit, dispatch }) {
       auth.delete('/logout')
-      .then(res=>{
-        commit('deleteUser')
-        router.push({name: 'login'})
-      })
-    },
-    register({commit, dispatch}, userData){
-      auth.post('register', userData)
-      .then(res=>{
-        commit('setUser', res.data)
-        router.push({name: 'Home'})
-      })
-    },
-    authenticate({commit, dispatch}){
-      auth.get('/authenticate')
-        .then(res=>{
-          commit('setUser', res.data)
-          router.push({name: 'Home'})
+        .then(res => {
+          commit('deleteUser')
+          router.push({ name: 'login' })
         })
-        .catch(res=>{
+    },
+    register({ commit, dispatch }, userData) {
+      auth.post('register', userData)
+        .then(res => {
+          commit('setUser', res.data)
+          router.push({ name: 'Home' })
+        })
+    },
+    authenticate({ commit, dispatch }) {
+      auth.get('/authenticate')
+        .then(res => {
+          commit('setUser', res.data)
+          router.push({ name: 'Home' })
+        })
+        .catch(res => {
           console.log(res.data)
         })
     },
     // BOARD STUFF
-    addBoard({dispatch, commit}, board){
+    addBoard({ dispatch, commit }, board) {
       api.post('/boards', board)
-      .then (res=>{
-        dispatch('getBoards')
-      })
+        .then(res => {
+          dispatch('getBoards')
+        })
     },
-    getBoards({commit, dispatch}){
+    getBoards({ commit, dispatch }) {
       api.get('/boards')
-      .then(res=>{
-        commit('setBoards', res.data)
-      })
+        .then(res => {
+          commit('setBoards', res.data)
+        })
     },
-    removeBoard({commit, dispatch, state}, board){
-      api.delete('/boards/'+board._id, board)
-      .then(res=>{
-        dispatch('getBoards')
-      })
+    removeBoard({ commit, dispatch, state }, board) {
+      api.delete('/boards/' + board._id, board)
+        .then(res => {
+          dispatch('getBoards')
+        })
     },
-    viewBoard({commit, dispatch, state}, boardId){
-      api.get('/boards/'+boardId)
-      .then(res=>{
-        commit('setActiveBoard', res.data)
-      })
+    viewBoard({ commit, dispatch, state }, boardId) {
+      api.get('/boards/' + boardId)
+        .then(res => {
+          commit('setActiveBoard', res.data)
+        })
     },
     // LIST STUFF
-    addList({dispatch, commit}, list){
+    addList({ dispatch, commit }, list) {
       api.post('/lists', list)
-      .then (res=>{
-        dispatch('getLists', list.boardId)
-      })
+        .then(res => {
+          dispatch('getLists', list.boardId)
+        })
     },
-    getLists({commit, dispatch}, boardId){
-      api.get('/boards/'+boardId+ '/lists')
-      .then(res=>{
-        commit('setLists', res.data)
-      })
+    getLists({ commit, dispatch }, boardId) {
+      api.get('/boards/' + boardId + '/lists')
+        .then(res => {
+          commit('setLists', res.data)
+        })
     },
-    removeList({commit, dispatch, state}, list){
-      api.delete('/lists/'+list._id, list)
-      .then(res=>{
-        dispatch('getLists')
-      })
+    removeList({ commit, dispatch, state }, list) {
+      api.delete('/lists/' + list._id, list)
+        .then(res => {
+          dispatch('getLists')
+        })
     },
 
-    viewList({commit, dispatch, state}, listId){
-      api.get('/lists/'+listId)
-      .then(res=>{
-        commit(res.data)
-      })
+    viewList({ commit, dispatch, state }, listId) {
+      api.get('/lists/' + listId)
+        .then(res => {
+          commit(res.data)
+        })
     },
     // TASK STUFF
-    addTask({dispatch, commit}, task){
+    addTask({ dispatch, commit }, task) {
       api.post('/tasks', task)
-      .then(res=>{
-        dispatch('getTasks', task.listId)
-      })
+        .then(res => {
+          dispatch('getTasks', task.listId)
+        })
     },
 
-    getTasks({commit, dispatch}, listId){
-      api.get('/tasks/'+listId+ '/tasks')
-      .then(res=>{
-        commit('setTasks', res.data)
-      })
+    getTasks({ commit, dispatch }, listId) {
+      api.get('/lists/' + listId + '/tasks')
+        .then(res => {
+          var payload = {
+            listId: listId,
+            tasks: res.data
+          }
+          commit('setTasks', payload)
+        })
     },
 
-    removeTask({commit, dispatch, state}, task){
-      api.delete('/tasks/'+task._id, task)
-      .then(res=>{
-        dispatch('getTasks')
-      })
+    removeTask({ commit, dispatch, state }, task) {
+      api.delete('/tasks/' + task._id, task)
+        .then(res => {
+          dispatch('getTasks', task.listId)
+        })
     },
 
-    viewTask({commit, dispatch, state}, taskId){
-      api.get('/tasks/'+taskId)
-      .then(res=>{
-        commit(res.data)
-      })
+    viewTask({ commit, dispatch, state }, taskId) {
+      api.get('/tasks/' + taskId)
+        .then(res => {
+          commit(res.data)
+        })
     },
 
     // COMMENT STUFF
-    addComment({dispatch, commit}, comment){
+    addComment({ dispatch, commit }, comment) {
       api.post('/comments', comment)
-      .then(res=>{
-        dispatch('getComments')
-      })
+        .then(res => {
+          dispatch('getComments')
+        })
     },
-    getComments({commit, dispatch}){
+    getComments({ commit, dispatch }) {
       api.get('/comments')
-      .then(res=>{
-        commit('setComments', res.data)
-      })
+        .then(res => {
+          commit('setComments', res.data)
+        })
     },
-    removeComment({commit, dispatch, state}, comment){
-      api.delete('/comments/'+comment._id, comment)
-      .then(res=>{
-        dispatch('getComments')
-      })
+    removeComment({ commit, dispatch, state }, comment) {
+      api.delete('/comments/' + comment._id, comment)
+        .then(res => {
+          dispatch('getComments')
+        })
     },
-    viewComments({commit, dispatch, state}, commentId){
-      api.get('/comments/'+commentId)
-      .then(res=>{
-        commit(res.data)
-      })
+    viewComments({ commit, dispatch, state }, commentId) {
+      api.get('/comments/' + commentId)
+        .then(res => {
+          commit(res.data)
+        })
     },
 
-
+// When moving tasks - update old LIST and NEW list (call getTasks with old and new listID)
 
 
   }
