@@ -27,7 +27,7 @@ export default new vuex.Store({
     activeBoard: {},
     lists: [],
     tasks: {},
-    comments: []
+    comments: {}
   },
   mutations: {
     setUser(state, user) {
@@ -48,8 +48,8 @@ export default new vuex.Store({
     setTasks(state, payload) {
       vue.set(state.tasks, payload.listId, payload.tasks) 
     },
-    setComments(state, comments) {
-      state.comments = comments
+    setComments(state, payload) {
+      vue.set(state.comments, payload.taskId, payload.comments)
     }
 
   },
@@ -181,16 +181,20 @@ export default new vuex.Store({
     getComments({ commit, dispatch }, taskId) {
       api.get('/tasks/' + taskId + '/comments')
         .then(res => {
-          commit('setComments', res.data)
+          var payload = {
+            taskId: taskId,
+            comments: res.data
+          }
+          commit('setComments', payload)
         })
     },
     removeComment({ commit, dispatch, state }, comment) {
       api.delete('/comments/' + comment._id, comment)
         .then(res => {
-          dispatch('getComments')
+          dispatch('getComments', comment.taskId)
         })
     },
-    viewComments({ commit, dispatch, state }, commentId) {
+    viewComment({ commit, dispatch, state }, commentId) {
       api.get('/comments/' + commentId)
         .then(res => {
           commit(res.data)

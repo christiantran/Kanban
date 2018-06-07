@@ -26,6 +26,7 @@ router.get('/api/tasks/:taskId/comments', (req, res, next)=>{
 
 router.post('/api/comments', (req, res, next)=>{
     var comment = req.body
+    comment.creator = req.session.uid
     Comments.create(comment)
     .then(newComment=>{
         res.status(200).send(newComment)

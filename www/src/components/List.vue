@@ -46,8 +46,10 @@
                         <h5>{{task.body}}</h5>
                         <h6 class="card-subtitle mb-2 text-muted"></h6>
                         <!-- <router-link :to="'/Tasks/'+task._id">View Task</router-link> -->
-                        <router-link :to="'/Comments/'+comment._id">View Comment</router-link>
+                        <!-- <router-link :to="'/Comments/'+comment._id">View Comment</router-link> -->
+
                         <!-- pull data from comment and display here.  No router link -->
+                        <button type="button" class='btn btn-link' data-toggle="modal" :data-target="'#createCommentModal'+task._id">Create Comment</button>
                         <a href="#" class="card-link" @click="removeTask(task)">Delete Task</a>
                     </div>
                 </div>
