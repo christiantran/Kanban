@@ -48,7 +48,7 @@
             </div>
         </div>
         <div>
-            <list :list="list" v-for="list in lists"></list>
+            <list :list="list" v-for="list in lists" :key="list.id"></list>
         </div>
 
     </div>
