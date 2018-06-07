@@ -4,7 +4,6 @@ var User = require('../models/user')
 
 // Get all
 router.get('/api/lists', (req, res, next)=>{
-    //Lists.find({creator: req.session.uid})
     Lists.find(req.query)
     .then(lists=>{
         res.status(200).send(lists)
@@ -13,16 +12,7 @@ router.get('/api/lists', (req, res, next)=>{
             res.status(400).send(err)
         })
 })
-// Never used
-// router.get('/api/lists/:id', (req, res, next)=>{
-//     Lists.findById(req.params.id)
-//     .then(list=>{
-//         res.status(200).send(list)
-//     })
-//         .catch(err =>{
-//             res.status(400).send(err)
-//         })
-// })
+
 // Get by Board Id
 router.get('/api/boards/:boardId/lists', (req, res, next)=>{
     Lists.find({boardId: req.params.boardId})
@@ -34,6 +24,7 @@ router.get('/api/boards/:boardId/lists', (req, res, next)=>{
             res.status(400).send(err)
         })
 })
+
 router.post('/api/lists', (req, res, next)=>{
     var list = req.body
     list.creator = req.session.uid

@@ -13,8 +13,9 @@ router.get('/api/comments', (req, res, next)=>{
         })
 })
 
-router.get('/api/comments/:id', (req, res, next)=>{
-    Comments.findById(req.params.id)
+// Get by Task Id
+router.get('/api/tasks/:taskId/comments', (req, res, next)=>{
+    Comments.find({taskId: req.params.taskId})
     .then(comments=>{
         res.status(200).send(comments)
     })
@@ -33,18 +34,6 @@ router.post('/api/comments', (req, res, next)=>{
             res.status(400).send(err)
         })
 })
-
-// router.put('/api/comments/:id/songs', (req, res) => {
-//     Comments.findById(req.params.id)
-//     .then(function(comment){
-//         comment.songs.addToSet(req.body)
-//         comment.save()
-//     })
-//     .catch(err=>{
-//         res.status(400).send(err)
-//     })
-//  })
-
 
 // edit
 router.put('/api/comments/:id', (req, res, next)=>{

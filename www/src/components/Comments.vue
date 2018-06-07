@@ -52,7 +52,7 @@
         <div class="card-body">
           <h5>{{comment.body}}</h5>
           <h6 class="card-subtitle mb-2 text-muted"></h6>
-          <!-- <router-link :to="'/Comments/'+comment._id">View Comment</router-link> -->
+          <router-link :to="'/Comments/'+comment._id">View Comment</router-link>
           <a href="#" class="card-link" @click="removeComment(comment)">Delete Comment</a>
         </div>
       </div>
@@ -74,7 +74,7 @@
     //   board
     // },
     mounted() {
-      this.$store.dispatch("getComments");
+      this.$store.dispatch("getComments", this.$route.params.taskId);
     },
     data() {
       return {
@@ -108,6 +108,8 @@
         this.$store.dispatch("getComments");
       },
       newComment() {
+        this.comment.taskId = this.$route.params.taskId
+        this.comment.userId = this.user._id
         this.$store.dispatch("addComment", this.comment);
       },
       removeComment(comment) {

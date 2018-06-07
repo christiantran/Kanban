@@ -10,11 +10,12 @@ var commentSchema = new Schema({
     userId: {
         type: ObjectId,
         ref: 'User',
+        required: true
     },
 
     boardId:{
         type: ObjectId,
-        ref: 'Board'
+        ref: 'Board',
     },
 
     listId:{
@@ -25,6 +26,7 @@ var commentSchema = new Schema({
     taskId: {
         type: ObjectId,
         ref: 'Task',
+        required: true
     }
 })
 
