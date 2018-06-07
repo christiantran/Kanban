@@ -179,7 +179,7 @@ export default new vuex.Store({
         })
     },
     getComments({ commit, dispatch }, taskId) {
-      api.get('/comments' + taskId + '/comments')
+      api.get('/tasks/' + taskId + '/comments')
         .then(res => {
           commit('setComments', res.data)
         })
