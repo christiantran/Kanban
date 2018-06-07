@@ -131,19 +131,27 @@ export default new vuex.Store({
           dispatch('getLists')
         })
     },
-
     viewList({ commit, dispatch, state }, listId) {
       api.get('/lists/' + listId)
         .then(res => {
           commit(res.data)
         })
     },
+
     // TASK STUFF
     addTask({ dispatch, commit }, task) {
       api.post('/tasks', task)
         .then(res => {
           dispatch('getTasks', task.listId)
         })
+    },
+
+    moveTask({commit, dispatch}, task){
+      api.put('/tasks/' +task._id, task)
+      .then(res=>{
+        dispatch('getTasks', task.listId)
+        dispatch('getTasks', task.oldListId)
+      })
     },
 
     getTasks({ commit, dispatch }, listId) {

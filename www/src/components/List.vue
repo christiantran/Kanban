@@ -44,6 +44,7 @@
                 <div class="card card2" v-for="task in tasks" style="width: 25rem;">
                     <div class="card-body">
                         <h5>{{task.body}}</h5>
+                        <button type="button" @click="moveTask(newListId, task)">Move Task</button>
                         <select v-model="newListId">
                             <option disabled value="">Please select list</option>
                             <option v-for="list in lists" :value = "list._id">{{list.title}}</option>
@@ -111,12 +112,11 @@
             removeTask(task) {
                 this.$store.dispatch("removeTask", task);
             },
-            // viewTask() {
-            //     this.$store.dispatch("viewTask");
-            // },
-            // viewComment() {
-            //     this.$store.dispatch("viewComment");
-            // }
+            moveTask(newListId, task){
+                task.oldListId = task.listId
+                task.listId = newListId;
+                this.$store.dispatch("moveTask", task)
+            }
         }
     };
 </script>
