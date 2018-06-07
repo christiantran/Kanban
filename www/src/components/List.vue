@@ -45,11 +45,7 @@
                     <div class="card-body">
                         <h5>{{task.body}}</h5>
                         <h6 class="card-subtitle mb-2 text-muted"></h6>
-                        <!-- <router-link :to="'/Tasks/'+task._id">View Task</router-link> -->
-                        <!-- <router-link :to="'/Comments/'+comment._id">View Comment</router-link> -->
-
-                        <!-- pull data from comment and display here.  No router link -->
-                        <button type="button" class='btn btn-link' data-toggle="modal" :data-target="'#createCommentModal'+task._id">Create Comment</button>
+                            <comments :taskId="task._id"></comments>
                         <a href="#" class="card-link" @click="removeTask(task)">Delete Task</a>
                     </div>
                 </div>
@@ -63,13 +59,13 @@
 <script>
     import router from "../router";
     //import home from "../Home";
-
+    import comments from "./comments"
 
     export default {
-        name: "Board",
+        name: "List",
         props: ["list"],
         components: {
-
+            comments
         },
         mounted() {
             this.$store.dispatch("getTasks", this.list._id);
