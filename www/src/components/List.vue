@@ -44,6 +44,10 @@
                 <div class="card card2" v-for="task in tasks" style="width: 25rem;">
                     <div class="card-body">
                         <h5>{{task.body}}</h5>
+                        <select v-model="newListId">
+                            <option disabled value="">Please select list</option>
+                            <option v-for="list in lists" :value = "list._id">{{list.title}}</option>
+                        </select>
                         <h6 class="card-subtitle mb-2 text-muted"></h6>
                             <comments :taskId="task._id"></comments>
                         <a href="#" class="card-link" @click="removeTask(task)">Delete Task</a>
@@ -73,6 +77,7 @@
 
         data() {
             return {
+                newListId: "",
                 task: {
                     body: ""
                 },
@@ -87,7 +92,12 @@
             },
             user() {
                 return this.$store.state.user;
+            },
+            // For the selector option
+            lists() {
+                return this.$store.state.lists
             }
+    
         },
         methods: {
             removeList(list) {

@@ -1,5 +1,5 @@
 <template>
-    <div class="card1" style="width: 30rem">
+    <div class="card1" style="width: 22rem">
         <div class="card-body ">
             <button type="button" class='btn btn-link' data-toggle="modal" :data-target="'#createCommentModal'+task._id">Create Comment</button>
             <div class="modal fade" :id="'createCommentModal'+task._id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div>
-                <div class="card card2" v-for="comment in comments" style="width: 25rem;">
+                <div class="card card3" v-for="comment in comments" style="width: 19rem;">
                     <div class="card-body">
                         <h5>{{comment.body}}</h5>
                         <h6 class="card-subtitle mb-2 text-muted"></h6>
